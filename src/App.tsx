@@ -19,7 +19,8 @@ const App = () => (
       <Sonner />
       <AnimatePresence mode="wait">
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<RoutineManager />} />
+          <Route path="/welcome" element={<Index />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/routines" element={<RoutineManager />} />

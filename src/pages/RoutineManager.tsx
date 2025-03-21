@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Layout } from '@/components/Layout';
 import { format, startOfWeek, endOfWeek, eachDayOfInterval, addDays, isSameDay } from 'date-fns';
@@ -18,7 +17,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { CalendarIcon, Clock, Plus, Tag, Trash } from 'lucide-react';
 import { StaggeredContainer, StaggeredItem } from '@/components/AnimatedTransition';
 
-// Define category options
 const categories = [
   { id: 'work', label: 'Work', color: 'bg-purple-500' },
   { id: 'personal', label: 'Personal', color: 'bg-blue-500' },
@@ -27,7 +25,6 @@ const categories = [
   { id: 'social', label: 'Social', color: 'bg-pink-500' },
 ];
 
-// Define activity type
 type Activity = {
   id: string;
   title: string;
@@ -37,7 +34,6 @@ type Activity = {
   categoryId: string;
 };
 
-// Validation schema for activity form
 const activityFormSchema = z.object({
   title: z.string().min(1, "Title is required"),
   description: z.string().optional(),
@@ -48,7 +44,6 @@ const activityFormSchema = z.object({
   categoryId: z.string().min(1, "Category is required"),
 });
 
-// Example activities
 const initialActivities: Activity[] = [
   {
     id: '1',
@@ -82,7 +77,6 @@ const RoutineManager = () => {
   const [activities, setActivities] = useState<Activity[]>(initialActivities);
   const [isAddActivityOpen, setIsAddActivityOpen] = useState(false);
 
-  // Create form
   const form = useForm<z.infer<typeof activityFormSchema>>({
     resolver: zodResolver(activityFormSchema),
     defaultValues: {
@@ -94,11 +88,14 @@ const RoutineManager = () => {
     },
   });
 
-  // Form submission handler
   const onSubmit = (values: z.infer<typeof activityFormSchema>) => {
     const newActivity: Activity = {
       id: Date.now().toString(),
-      ...values,
+      title: values.title,
+      description: values.description || "",
+      date: values.date,
+      time: values.time,
+      categoryId: values.categoryId,
     };
     
     setActivities([...activities, newActivity]);
@@ -106,23 +103,19 @@ const RoutineManager = () => {
     form.reset();
   };
 
-  // Delete activity handler
   const handleDeleteActivity = (id: string) => {
     setActivities(activities.filter(activity => activity.id !== id));
   };
 
-  // Filter activities by date
   const getActivitiesForDate = (date: Date) => {
     return activities.filter(activity => isSameDay(activity.date, date));
   };
 
-  // Get days for the current week
   const weekDays = eachDayOfInterval({
     start: startOfWeek(date, { weekStartsOn: 1 }),
     end: endOfWeek(date, { weekStartsOn: 1 }),
   });
 
-  // Get activities for the current view
   const currentViewActivities = view === 'day' 
     ? getActivitiesForDate(date)
     : view === 'week'
@@ -131,7 +124,6 @@ const RoutineManager = () => {
       )
     : activities;
 
-  // Get category by ID
   const getCategoryById = (categoryId: string) => {
     return categories.find(category => category.id === categoryId);
   };
@@ -153,7 +145,6 @@ const RoutineManager = () => {
         </StaggeredContainer>
 
         <div className="flex flex-col lg:flex-row gap-6">
-          {/* Sidebar */}
           <div className="w-full lg:w-80 flex flex-col gap-4">
             <Card className="shadow-md border-purple-100 dark:border-purple-800/30">
               <CardHeader className="pb-2">
@@ -194,7 +185,6 @@ const RoutineManager = () => {
             </Button>
           </div>
 
-          {/* Main Content */}
           <div className="flex-1">
             <Card className="shadow-md border-purple-100 dark:border-purple-800/30">
               <CardHeader className="pb-0">
@@ -309,7 +299,6 @@ const RoutineManager = () => {
           </div>
         </div>
 
-        {/* Add Activity Dialog */}
         <Dialog open={isAddActivityOpen} onOpenChange={setIsAddActivityOpen}>
           <DialogContent className="sm:max-w-[500px]">
             <DialogHeader>
@@ -453,7 +442,6 @@ const RoutineManager = () => {
   );
 };
 
-// Activity Card Component
 interface ActivityCardProps {
   activity: Activity;
   category?: { id: string; label: string; color: string };
