@@ -4,15 +4,16 @@ import { Activity } from '@/types/activity';
 import { getCategoryById } from '@/constants/categories';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Clock, Tag, Trash } from 'lucide-react';
+import { Clock, Tag, Trash, Edit } from 'lucide-react';
 
 interface ActivityCardProps {
   activity: Activity;
   category?: { id: string; label: string; color: string };
   onDelete: () => void;
+  onEdit: () => void;
 }
 
-export const ActivityCard: React.FC<ActivityCardProps> = ({ activity, category, onDelete }) => {
+export const ActivityCard: React.FC<ActivityCardProps> = ({ activity, category, onDelete, onEdit }) => {
   return (
     <Card className="shadow-sm border-purple-100 dark:border-purple-800/30 hover:shadow-md transition-shadow">
       <CardHeader className="py-3">
@@ -22,6 +23,14 @@ export const ActivityCard: React.FC<ActivityCardProps> = ({ activity, category, 
             <CardTitle className="text-base font-semibold">{activity.title}</CardTitle>
           </div>
           <div className="flex items-center gap-1">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="h-7 w-7 text-muted-foreground hover:text-blue-500"
+              onClick={onEdit}
+            >
+              <Edit size={15} />
+            </Button>
             <Button 
               variant="ghost" 
               size="icon" 

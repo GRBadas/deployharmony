@@ -8,12 +8,14 @@ import { ActivityCard } from './ActivityCard';
 interface DayViewProps {
   activities: Activity[];
   onDeleteActivity: (id: string) => void;
+  onEditActivity: (id: string) => void;
   onAddActivity: () => void;
 }
 
 export const DayView: React.FC<DayViewProps> = ({ 
   activities, 
-  onDeleteActivity, 
+  onDeleteActivity,
+  onEditActivity, 
   onAddActivity 
 }) => {
   return (
@@ -27,6 +29,7 @@ export const DayView: React.FC<DayViewProps> = ({
               activity={activity} 
               category={getCategoryById(activity.categoryId)} 
               onDelete={() => onDeleteActivity(activity.id)}
+              onEdit={() => onEditActivity(activity.id)}
             />
           ))
       ) : (
