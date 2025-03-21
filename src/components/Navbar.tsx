@@ -13,10 +13,8 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-  { name: 'Home', path: '/', icon: <Home className="w-5 h-5" /> },
-  { name: 'Dashboard', path: '/dashboard', icon: <LayoutDashboard className="w-5 h-5" /> },
-  { name: 'Tasks', path: '/tasks', icon: <CheckSquare className="w-5 h-5" /> },
-  { name: 'Settings', path: '/settings', icon: <Settings className="w-5 h-5" /> },
+  { name: 'Início', path: '/', icon: <Home className="w-5 h-5" /> },
+  { name: 'Configurações', path: '/settings', icon: <Settings className="w-5 h-5" /> },
 ];
 
 export const Navbar = () => {
@@ -53,7 +51,7 @@ export const Navbar = () => {
             whileHover={{ rotate: 5, scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           />
-          <span className="text-xl font-medium tracking-tight">Zenith</span>
+          <span className="text-xl font-medium tracking-tight">Gerenciamento de Rotina</span>
         </Link>
 
         {/* Desktop Navigation */}

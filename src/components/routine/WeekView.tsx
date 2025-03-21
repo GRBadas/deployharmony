@@ -1,7 +1,7 @@
-
 import React from 'react';
 import { Activity } from '@/types/activity';
 import { format, isSameDay } from 'date-fns';
+import { ptBR } from 'date-fns/locale'; // Importa o locale em português
 import { getCategoryById } from '@/constants/categories';
 import { cn } from '@/lib/utils';
 import { Clock } from 'lucide-react';
@@ -20,9 +20,9 @@ export const WeekView: React.FC<WeekViewProps> = ({ days, getActivitiesForDate }
             "text-sm font-medium py-1 text-center rounded-md mb-2",
             isSameDay(day, new Date()) ? "bg-purple-100 text-purple-800 dark:bg-purple-800/20 dark:text-purple-300" : ""
           )}>
-            {format(day, 'EEE')}
+            {format(day, 'EEE', { locale: ptBR })} {/* Dia da semana em português */}
             <div className="text-xs text-muted-foreground">
-              {format(day, 'MMM d')}
+              {format(day, 'MMM d', { locale: ptBR })} {/* Data formatada em português */}
             </div>
           </div>
           
@@ -40,8 +40,10 @@ export const WeekView: React.FC<WeekViewProps> = ({ days, getActivitiesForDate }
                     {activity.time}
                   </div>
                   <div className="flex items-center mt-1">
-                    <div className={`w-2 h-2 rounded-full ${getCategoryById(activity.categoryId)?.color}`}></div>
-                    <span className="text-xs ml-1 text-muted-foreground">{getCategoryById(activity.categoryId)?.label}</span>
+                    <div className={`w-2 h-2 rounded-full ${getCategoryById(activity.categoryId)?.color || 'bg-gray-500'}`}></div>
+                    <span className="text-xs ml-1 text-muted-foreground">
+                      {getCategoryById(activity.categoryId)?.label || 'Sem categoria'}
+                    </span>
                   </div>
                 </div>
               ))}

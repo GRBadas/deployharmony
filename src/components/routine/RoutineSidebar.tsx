@@ -17,7 +17,7 @@ export const RoutineSidebar: React.FC<RoutineSidebarProps> = ({ date, onDateChan
     <div className="w-full lg:w-80 flex flex-col gap-4">
       <Card className="shadow-md border-purple-100 dark:border-purple-800/30">
         <CardHeader className="pb-2">
-          <CardTitle className="text-lg text-purple-800 dark:text-purple-300">Calendar</CardTitle>
+          <CardTitle className="text-lg text-purple-800 dark:text-purple-300">Calendário</CardTitle>
         </CardHeader>
         <CardContent>
           <Calendar
@@ -31,7 +31,7 @@ export const RoutineSidebar: React.FC<RoutineSidebarProps> = ({ date, onDateChan
 
       <Card className="shadow-md border-purple-100 dark:border-purple-800/30">
         <CardHeader className="pb-2">
-          <CardTitle className="text-lg text-purple-800 dark:text-purple-300">Categories</CardTitle>
+          <CardTitle className="text-lg text-purple-800 dark:text-purple-300">Categorias</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-2">
@@ -47,7 +47,7 @@ export const RoutineSidebar: React.FC<RoutineSidebarProps> = ({ date, onDateChan
 
       <Button onClick={onAddActivity} className="mt-2 w-full bg-purple-600 hover:bg-purple-700 text-white">
         <Plus size={18} className="mr-2" />
-        Add New Activity
+        Nova Atividade
       </Button>
     </div>
   );
