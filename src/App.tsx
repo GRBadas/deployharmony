@@ -5,8 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Index from "./pages/Index";
-import Dashboard from "./pages/Dashboard";
-import Tasks from "./pages/Tasks";
 import RoutineManager from "./pages/RoutineManager";
 import NotFound from "./pages/NotFound";
 
@@ -21,8 +19,6 @@ const App = () => (
         <Routes>
           <Route path="/" element={<RoutineManager />} />
           <Route path="/welcome" element={<Index />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/tasks" element={<Tasks />} />
           <Route path="/routines" element={<RoutineManager />} />
           <Route path="/settings" element={<NotFound />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

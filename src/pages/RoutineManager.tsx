@@ -17,6 +17,7 @@ import { ActivityFormValues } from '@/schemas/activitySchema';
 import { v4 as uuidv4 } from 'uuid';
 import { Activity } from '@/types/activity';
 import { useToast } from '@/hooks/use-toast';
+import { ptBR } from "date-fns/locale";
 
 const RoutineManager = () => {
   const { toast } = useToast();
@@ -147,15 +148,15 @@ const RoutineManager = () => {
         <div className="flex-1 min-w-0">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 space-y-4 sm:space-y-0">
             <div>
-              <h1 className="text-2xl font-semibold">Daily Routine</h1>
+              <h1 className="text-2xl font-semibold">Rotina de hoje</h1>
               <p className="text-muted-foreground">
-                Manage your daily activities and routines
+                Gerencie suas atividades diárias
               </p>
             </div>
             
             <Button onClick={toggleAddDialog} className="bg-purple-600 hover:bg-purple-700">
               <Plus className="w-4 h-4 mr-2" />
-              Add Activity
+              Nova Atividade
             </Button>
           </div>
           
@@ -172,9 +173,9 @@ const RoutineManager = () => {
               
               <div className="text-center">
                 <h2 className="text-xl font-medium">
-                  {currentView === 'day' && format(selectedDate, 'EEEE, MMMM d, yyyy')}
-                  {currentView === 'week' && `Week of ${format(getWeekDays()[0], 'MMM d')} - ${format(getWeekDays()[6], 'MMM d, yyyy')}`}
-                  {currentView === 'month' && format(selectedDate, 'MMMM yyyy')}
+                  {currentView === 'day' && format(selectedDate, 'EEEE,d MMMM, yyyy', { locale: ptBR })}
+                  {currentView === 'week' && `Week of ${format(getWeekDays()[0], 'd MMM', { locale: ptBR })} - ${format(getWeekDays()[6], 'd MMM, yyyy', { locale: ptBR })}`}
+                  {currentView === 'month' && format(selectedDate, 'MMMM yyyy', { locale: ptBR })}
                 </h2>
               </div>
               
@@ -194,9 +195,9 @@ const RoutineManager = () => {
               className="w-full"
             >
               <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="day">Day</TabsTrigger>
-                <TabsTrigger value="week">Week</TabsTrigger>
-                <TabsTrigger value="month">Month</TabsTrigger>
+                <TabsTrigger value="day">Dia</TabsTrigger>
+                <TabsTrigger value="week">Semana</TabsTrigger>
+                <TabsTrigger value="month">Mês</TabsTrigger>
               </TabsList>
             </Tabs>
           </div>
